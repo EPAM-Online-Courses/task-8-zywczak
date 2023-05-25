@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
+
 class FitCalculatorTest {
 
     @Test
@@ -135,11 +137,6 @@ class FitCalculatorTest {
     }
 }
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class PlannerTest {
 
     private Planner planner;
@@ -176,3 +173,4 @@ class PlannerTest {
         assertEquals(expectedIntake, dailyIntake);
     }
 }
+
