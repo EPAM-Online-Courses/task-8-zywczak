@@ -133,11 +133,15 @@ class FitCalculatorTest {
 
         // when
         double[] bmiScoresArray = FitCalculator.calculateBMIScore(userList);
-        List<Double> bmiScores = Arrays.asList(bmiScoresArray);
+        List<Double> bmiScores = new ArrayList<>();
+        for (double score : bmiScoresArray) {
+            bmiScores.add(score);
+        }
 
         // then
-        assertEquals(TestConstants.TEST_USERS_BMI_SCORE, bmiScores);
-    }
+        List<Double> expectedBmiScores = TestConstants.TEST_USERS_BMI_SCORE;
+        assertEquals(expectedBmiScores, bmiScores);
+}
 }
 
 class PlannerTest {
