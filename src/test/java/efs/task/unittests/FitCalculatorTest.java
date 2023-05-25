@@ -10,6 +10,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
+import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.params.provider.EnumSource;
+
+import java.util.Map;
+
 class FitCalculatorTest {
 
     @Test
@@ -123,5 +130,42 @@ class FitCalculatorTest {
 
         // then
         assertEquals(TestConstants.TEST_USERS_BMI_SCORE, bmiScores);
+    }
+}
+
+class PlannerTest {
+
+    private Planner planner;
+
+    @BeforeEach
+    void setUp() {
+        planner = new Planner();
+    }
+
+    @ParameterizedTest(name = "Activity Level = {0}")
+    @EnumSource(ActivityLevel.class)
+    void shouldCalculateCorrectDailyCaloriesDemand_forAllActivityLevels(ActivityLevel activityLevel) {
+        // given
+        User user = TestConstants.TEST_USER;
+
+        // when
+        int calculatedCaloriesDemand = planner.calculateDailyCaloriesDemand(user, activityLevel);
+
+        // then
+        int expectedCaloriesDemand = TestConstants.CALORIES_ON_ACTIVITY_LEVEL.get(activityLevel);
+        assertEquals(expectedCaloriesDemand, calculatedCaloriesDemand);
+    }
+
+    @Test
+    void shouldCalculateCorrectDailyIntake_forTestUser() {
+        // given
+        User user = TestConstants.TEST_USER;
+
+        // when
+        DailyIntake dailyIntake = planner.calculateDailyIntake(user);
+
+        // then
+        DailyIntake expectedDailyIntake = TestConstants.TEST_USER_DAILY_INTAKE;
+        assertEquals(expectedDailyIntake, dailyIntake);
     }
 }
