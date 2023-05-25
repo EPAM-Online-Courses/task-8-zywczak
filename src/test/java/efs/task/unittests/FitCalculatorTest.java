@@ -92,7 +92,7 @@ class FitCalculatorTest {
     
     @ParameterizedTest(name = "Height={0}, Weight={1}")
     @CsvFileSource(resources = "/data.csv") // CSV file containing height and weight pairs
-    void shouldReturnFalse_forAllPairsFromFile_whenHeightAndWeightFromCSV(double height, double weight) {
+    void shouldReturnFalse_forAllPairsFromFile_whenHeightAndWeightFromCSV(Double height, Double weight) {
         // when
         boolean bmiCorrect = FitCalculator.isBMICorrect(weight, height);
 
