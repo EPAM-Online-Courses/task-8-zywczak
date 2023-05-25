@@ -87,4 +87,41 @@ class FitCalculatorTest {
         // then
         assertFalse(bmiCorrect);
     }
+    
+     @Test
+    void shouldReturnUserWithWorstBMI_fromUserList() {
+        // given
+        List<User> userList = TestConstants.TEST_USERS_LIST;
+
+        // when
+        User userWithWorstBMI = FitCalculator.findUserWithTheWorstBMI(userList);
+
+        // then
+        assertEquals(97.3, userWithWorstBMI.getWeight());
+        assertEquals(1.79, userWithWorstBMI.getHeight());
+    }
+
+    @Test
+    void shouldReturnNull_forEmptyUserList() {
+        // given
+        List<User> userList = List.of();
+
+        // when
+        User userWithWorstBMI = FitCalculator.findUserWithTheWorstBMI(userList);
+
+        // then
+        assertNull(userWithWorstBMI);
+    }
+
+    @Test
+    void shouldReturnBMIScore_forUserList() {
+        // given
+        List<User> userList = TestConstants.TEST_USERS_LIST;
+
+        // when
+        List<Double> bmiScores = FitCalculator.calculateBMIScore(userList);
+
+        // then
+        assertEquals(TestConstants.TEST_USERS_BMI_SCORE, bmiScores);
+    }
 }
