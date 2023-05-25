@@ -131,7 +131,8 @@ class FitCalculatorTest {
         List<User> userList = TestConstants.TEST_USERS_LIST;
 
         // when
-        List<Double> bmiScores = FitCalculator.calculateBMIScore(userList);
+        double[] bmiScoresArray = FitCalculator.calculateBMIScore(userList);
+        List<Double> bmiScores = Arrays.asList(bmiScoresArray);
 
         // then
         assertEquals(TestConstants.TEST_USERS_BMI_SCORE, bmiScores);
