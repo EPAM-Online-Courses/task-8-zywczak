@@ -12,9 +12,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.Assertions;
 
 class FitCalculatorTest {
-    FitCalculatorTest() {
-    }
-
     @Test
     void shouldReturnTrue_whenDietRecommended() {
         // given
@@ -54,16 +51,20 @@ class FitCalculatorTest {
         });
     }
 
-    @ParameterizedTest(name = "weight: {0}")
-    @ValueSource(doubles = {60.0, 70.0, 80.0})
+    @ParameterizedTest(
+            name = "weight: {0}"
+    )
+    @ValueSource(
+            doubles = {92.0, 102.0, 99.2}
+    )
     void shouldReturnTrue_whenDietIsRecommended(double weight) {
-        // given
+        //given
         double height = 1.8;
-
-        // when
+        
+        //when
         boolean recommended = FitCalculator.isBMICorrect(weight, height);
-
-        // then
+        
+        //then
         Assertions.assertTrue(recommended);
     }
 
