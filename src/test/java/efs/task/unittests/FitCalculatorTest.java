@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
 
 class FitCalculatorTest {
 
