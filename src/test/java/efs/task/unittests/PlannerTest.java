@@ -17,30 +17,31 @@ class PlannerTest {
         planner = new Planner();
     }
 
-    @ParameterizedTest(name = "Activity Level={0}")
+     @ParameterizedTest(name = "activityLevel = {0}")
     @EnumSource(ActivityLevel.class)
-    void shouldCalculateDailyCaloriesDemand_forAllActivityLevels(ActivityLevel activityLevel) {
+    void shouldCalculateDailyCaloriesDemand(ActivityLevel activityLevel) {
         // given
         User user = TestConstants.TEST_USER;
 
         // when
-        int calculatedCalories = planner.calculateDailyCaloriesDemand(user, activityLevel);
+        double calculatedCalories = planner.calculateDailyCaloriesDemand(user, activityLevel);
 
         // then
-        int expectedCalories = TestConstants.CALORIES_ON_ACTIVITY_LEVEL.get(activityLevel);
+        Map<ActivityLevel, Double> expectedCaloriesMap = TestConstants.CALORIES_ON_ACTIVITY_LEVEL;
+        double expectedCalories = expectedCaloriesMap.get(activityLevel);
         assertEquals(expectedCalories, calculatedCalories);
     }
-
+    
     @Test
-    void shouldCalculateDailyIntake_forTestUser() {
+    void shouldCalculateDailyIntake() {
         // given
         User user = TestConstants.TEST_USER;
-
+        
         // when
-        NutrientIntake dailyIntake = planner.calculateDailyIntake(user);
+        Planner.DailyIntake dailyIntake = planner.calculateDailyIntake(user);
 
         // then
-        NutrientIntake expectedIntake = TestConstants.TEST_USER_DAILY_INTAKE;
-        assertEquals(expectedIntake, dailyIntake);
+        Planner.DailyIntake expectedDailyIntake = TestConstants.TEST_USER_DAILY_INTAKE;
+        assertEquals(expectedDailyIntake, dailyIntake);
     }
 }
