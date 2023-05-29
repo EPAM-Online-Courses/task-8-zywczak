@@ -59,7 +59,7 @@ class FitCalculatorTest {
 
     @ParameterizedTest(name = "weight: {0}")
     @ValueSource(doubles = {60.0, 70.0, 80.0})
-    void shouldReturnTrue_whenDietRecommended(double weight) {
+    void shouldReturnTrue_whenDietIsRecommended(double weight) {
         // given
         double height = 1.80;
 
