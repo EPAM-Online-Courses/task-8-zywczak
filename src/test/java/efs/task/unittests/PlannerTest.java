@@ -38,10 +38,10 @@ class PlannerTest {
         User user = TestConstants.TEST_USER;
         
         // when
-        Planner.DailyIntake dailyIntake = planner.calculateDailyIntake(user);
+        DailyIntake dailyIntake = planner.calculateDailyIntake(user);
 
         // then
-        Planner.DailyIntake expectedDailyIntake = TestConstants.TEST_USER_DAILY_INTAKE;
+        DailyIntake expectedDailyIntake = TestConstants.TEST_USER_DAILY_INTAKE;
         assertEquals(expectedDailyIntake, dailyIntake);
     }
 }
