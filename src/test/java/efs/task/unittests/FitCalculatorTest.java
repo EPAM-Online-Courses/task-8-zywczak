@@ -61,7 +61,7 @@ class FitCalculatorTest {
     @ValueSource(doubles = {60.0, 70.0, 80.0})
     void shouldReturnTrue_whenDietIsRecommended(double weight) {
         // given
-        double height = 1.80;
+        double height = 1.8;
 
         // when
         boolean recommended = FitCalculator.isBMICorrect(weight, height);
@@ -76,7 +76,7 @@ class FitCalculatorTest {
             "1.80, 80.5",
             "1.60, 65.2"
     })
-    void shouldReturnFalse_whenDietNotRecommended(double height, double weight) {
+    void shouldReturnFalse_whenDietIsNotRecommended(double height, double weight) {
         // when
         boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
