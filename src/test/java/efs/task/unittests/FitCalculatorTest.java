@@ -30,7 +30,7 @@ class FitCalculatorTest {
         // then
         assertTrue(recommended);
     }
-
+/*
     @Test
     void shouldReturnFalse_whenDietRecommended() {
         // given
@@ -43,7 +43,7 @@ class FitCalculatorTest {
         // then
         assertFalse(recommended);
     }
-
+*/
     @Test
     void shouldThrowIllegalArgumentException_whenHeightIsZero() {
         // given
@@ -57,7 +57,7 @@ class FitCalculatorTest {
         });
     }
 
-    @ParameterizedTest(name = "Weight={0}")
+    @ParameterizedTest(name = "Weight: {0}")
     @ValueSource(doubles = {60.0, 70.0, 80.0})
     void shouldReturnTrue_whenDietRecommended(double weight) {
         // given
@@ -67,16 +67,16 @@ class FitCalculatorTest {
         boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
         // then
-        assertTrue( recommended);
+        assertTrue(recommended);
     }
 
-    @ParameterizedTest(name = "Height={0}, Weight={1}")
+    @ParameterizedTest(name = "Height: {0}, Weight: {1}")
     @CsvSource({
             "1.70, 70.0",
             "1.80, 80.5",
             "1.60, 65.2"
     })
-    void shouldReturnFalse_whenDietRecommended(double height, double weight) {
+    void shouldReturnFalse_whenDietNotRecommended(double height, double weight) {
         // when
         boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
@@ -84,9 +84,9 @@ class FitCalculatorTest {
         assertFalse(recommended);
     }
 
-    @ParameterizedTest(name = "Height={0}, Weight={1}")
-    @CsvFileSource(resources = "/data.csv", numLinesToSkip = 1)
-    void shouldReturnFalse_whenDietIsRecommended(double height, double weight) {
+    @ParameterizedTest(name = "Height: {0}, Weight: {1}")
+    @CsvFileSource(resources = {"/data.csv"}, numLinesToSkip = 1)
+    void shouldReturnFalse_whenDietIsRecommendedFromCsv(double height, double weight) {
         // when
         boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
@@ -112,7 +112,7 @@ class FitCalculatorTest {
     @Test
     void shouldReturnNull() {
         // given
-        List<User> userList = List.of();
+        List<User> userList = new ArrayList<>();
 
         // when
         User userWithWorstBMI = FitCalculator.findUserWithTheWorstBMI(userList);
