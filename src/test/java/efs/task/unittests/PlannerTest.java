@@ -24,11 +24,11 @@ class PlannerTest {
         User user = TestConstants.TEST_USER;
 
         // when
-        double calculatedCalories = planner.calculateDailyCaloriesDemand(user, activityLevel);
+        int calculatedCalories = planner.calculateDailyCaloriesDemand(user, activityLevel);
 
         // then
-        Map<ActivityLevel, Double> expectedCaloriesMap = TestConstants.CALORIES_ON_ACTIVITY_LEVEL;
-        double expectedCalories = expectedCaloriesMap.get(activityLevel);
+        Map<ActivityLevel, Integer> expectedCaloriesMap = TestConstants.CALORIES_ON_ACTIVITY_LEVEL;
+        int expectedCalories = expectedCaloriesMap.get(activityLevel);
         assertEquals(expectedCalories, calculatedCalories);
     }
     
