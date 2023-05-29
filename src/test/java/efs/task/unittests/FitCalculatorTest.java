@@ -9,12 +9,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.Assertions.assertNull;
-import org.junit.jupiter.api.Assertions.assertFalse;
-import org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Assertions.assertThrows;
-import org.junit.jupiter.api.Assertions.assertArrayEquals;
+import org.junit.jupiter.api.Assertions;
 
 class FitCalculatorTest {
 
@@ -28,7 +23,7 @@ class FitCalculatorTest {
         boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
         // then
-        assertTrue(recommended);
+        Assertions.assertTrue(recommended);
     }
 /*
     @Test
@@ -51,7 +46,7 @@ class FitCalculatorTest {
         double height = 0.0;
 
         // then
-        assertThrows(IllegalArgumentException.class, () -> {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
             // when
             FitCalculator.isBMICorrect(weight, height);
         });
@@ -67,7 +62,7 @@ class FitCalculatorTest {
         boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
         // then
-        assertTrue(recommended);
+        Assertions.assertTrue(recommended);
     }
 
     @ParameterizedTest(name = "height: {0}, weight: {1}")
@@ -81,7 +76,7 @@ class FitCalculatorTest {
         boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
         // then
-        assertFalse(recommended);
+        Assertions.assertFalse(recommended);
     }
 
     @ParameterizedTest(name = "height: {0}, weight: {1}")
@@ -91,7 +86,7 @@ class FitCalculatorTest {
         boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
         // then
-        assertFalse(recommended);
+        Assertions.assertFalse(recommended);
     }
 
     @Test
@@ -105,8 +100,8 @@ class FitCalculatorTest {
         User userWithWorstBMI = FitCalculator.findUserWithTheWorstBMI(userList);
 
         // then
-        assertEquals(weight, userWithWorstBMI.getWeight());
-        assertEquals(height, userWithWorstBMI.getHeight());
+        Assertions.assertEquals(weight, userWithWorstBMI.getWeight());
+        Assertions.assertEquals(height, userWithWorstBMI.getHeight());
     }
 
     @Test
@@ -118,7 +113,7 @@ class FitCalculatorTest {
         User userWithWorstBMI = FitCalculator.findUserWithTheWorstBMI(userList);
 
         // then
-        assertNull(userWithWorstBMI);
+        Assertions.assertNull(userWithWorstBMI);
     }
 
     @Test
@@ -131,6 +126,6 @@ class FitCalculatorTest {
 
         // then
         double[] expectedBmiScores = TestConstants.TEST_USERS_BMI_SCORE;
-        assertArrayEquals(expectedBmiScores, bmiScores);
+        Assertions.assertArrayEquals(expectedBmiScores, bmiScores);
     }
 }
