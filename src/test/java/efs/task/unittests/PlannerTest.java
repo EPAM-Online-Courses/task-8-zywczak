@@ -42,9 +42,9 @@ class PlannerTest {
 
         // then
         DailyIntake expectedDailyIntake = TestConstants.TEST_USER_DAILY_INTAKE;
-        assertEquals(dailyIntake.getCalories(), expectedDailyIntake.getCalories());
-        assertEquals(dailyIntake.getProtein(), expectedDailyIntake.getProtein());
-        assertEquals(dailyIntake.getFat(), expectedDailyIntake.getFat());
-        assertEquals(dailyIntake.getCarbohydrate(), expectedDailyIntake.getCarbohydrate());
+        assertEquals(dailyIntake, expectedDailyIntake);
+        //assertEquals(dailyIntake.getProtein(), expectedDailyIntake.getProtein());
+        //assertEquals(dailyIntake.getFat(), expectedDailyIntake.getFat());
+        //assertEquals(dailyIntake.getCarbohydrate(), expectedDailyIntake.getCarbohydrate());
     }
 }
