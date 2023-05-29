@@ -1,3 +1,5 @@
+package efs.task.unittests;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,16 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions;
 
 class FitCalculatorTest {
 
@@ -32,16 +27,16 @@ class FitCalculatorTest {
     }
 
     @Test
-    void shouldReturnFalse_whenBMICorrectReturnsFalse() {
+    void shouldReturnFalse_whenDietRecommended() {
         // given
         double weight = 69.5;
         double height = 1.72;
 
         // when
-        boolean bmiCorrect = FitCalculator.isBMICorrect(weight, height);
+        boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
         // then
-        assertFalse(bmiCorrect);
+        assertFalse(recommended);
     }
 
     @Test
@@ -59,15 +54,15 @@ class FitCalculatorTest {
 
     @ParameterizedTest(name = "Weight={0}")
     @ValueSource(doubles = {60.0, 70.0, 80.0})
-    void shouldReturnTrue_forAllWeights_whenFixedHeight(double weight) {
+    void shouldReturnTrue_whenDietRecommended(double weight) {
         // given
         double height = 1.80;
 
         // when
-        boolean bmiCorrect = FitCalculator.isBMICorrect(weight, height);
+        boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
         // then
-        assertTrue(bmiCorrect);
+        assertTrue( recommended);
     }
 
     @ParameterizedTest(name = "Height={0}, Weight={1}")
@@ -76,39 +71,41 @@ class FitCalculatorTest {
             "1.80, 80.5",
             "1.60, 65.2"
     })
-    void shouldReturnFalse_forAllPairs_whenHeightAndWeightProvided(double height, double weight) {
+    void shouldReturnFalse_whenDietRecommended(double height, double weight) {
         // when
-        boolean bmiCorrect = FitCalculator.isBMICorrect(weight, height);
+        boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
         // then
-        assertFalse(bmiCorrect);
+        assertFalse(recommended);
     }
 
     @ParameterizedTest(name = "Height={0}, Weight={1}")
-    @CsvFileSource(resources = "/data.csv")
-    void shouldReturnFalse_forAllPairsFromFile_whenHeightAndWeightFromCSV(Double height, Double weight) {
+    @CsvFileSource(resources = "/data.csv", numLinesToSkip = 1)
+    void shouldReturnFalse_whenDietIsRecommended(double height, double weight) {
         // when
-        boolean bmiCorrect = FitCalculator.isBMICorrect(weight, height);
+        boolean recommended = FitCalculator.isBMICorrect(weight, height);
 
         // then
-        assertFalse(bmiCorrect);
+        assertFalse(recommended);
     }
 
     @Test
-    void shouldReturnUserWithWorstBMI_fromUserList() {
+    void shouldReturnUserWithWorstBMI() {
         // given
         List<User> userList = TestConstants.TEST_USERS_LIST;
-
+        double weight = 97.3;
+        double height = 1.79;
+        
         // when
         User userWithWorstBMI = FitCalculator.findUserWithTheWorstBMI(userList);
 
         // then
-        assertEquals(97.3, userWithWorstBMI.getWeight());
-        assertEquals(1.79, userWithWorstBMI.getHeight());
+        assertEquals(weight, userWithWorstBMI.getWeight());
+        assertEquals(height, userWithWorstBMI.getHeight());
     }
 
     @Test
-    void shouldReturnNull_forEmptyUserList() {
+    void shouldReturnNull() {
         // given
         List<User> userList = List.of();
 
@@ -120,57 +117,15 @@ class FitCalculatorTest {
     }
 
     @Test
-    void shouldReturnBMIScore_forUserList() {
+    void shouldReturnEqualToList() {
         // given
         List<User> userList = TestConstants.TEST_USERS_LIST;
 
         // when
-        double[] bmiScoresArray = FitCalculator.calculateBMIScore(userList);
-        List<Double> bmiScores = new ArrayList<>();
-        for (double score : bmiScoresArray) {
-            bmiScores.add(score);
-        }
+       List<double> bmiScores = FitCalculator.calculateBMIScore(testConstants);
 
         // then
-        List<Double> expectedBmiScores = TestConstants.TEST_USERS_BMI_SCORE;
+        List<double> expectedBmiScores = TestConstants.TEST_USERS_BMI_SCORE;
         assertEquals(expectedBmiScores, bmiScores);
     }
 }
-
-class PlannerTest {
-
-    private Planner planner;
-
-    @BeforeEach
-    void setUp() {
-        planner = new Planner();
-    }
-
-    @ParameterizedTest(name = "Activity Level={0}")
-    @EnumSource(ActivityLevel.class)
-    void shouldCalculateDailyCaloriesDemand_forAllActivityLevels(ActivityLevel activityLevel) {
-        // given
-        User user = TestConstants.TEST_USER;
-
-        // when
-        int calculatedCalories = planner.calculateDailyCaloriesDemand(user, activityLevel);
-
-        // then
-        int expectedCalories = TestConstants.CALORIES_ON_ACTIVITY_LEVEL.get(activityLevel);
-        assertEquals(expectedCalories, calculatedCalories);
-    }
-
-    @Test
-    void shouldCalculateDailyIntake_forTestUser() {
-        // given
-        User user = TestConstants.TEST_USER;
-
-        // when
-        NutrientIntake dailyIntake = planner.calculateDailyIntake(user);
-
-        // then
-        NutrientIntake expectedIntake = TestConstants.TEST_USER_DAILY_INTAKE;
-        assertEquals(expectedIntake, dailyIntake);
-    }
-}
-
