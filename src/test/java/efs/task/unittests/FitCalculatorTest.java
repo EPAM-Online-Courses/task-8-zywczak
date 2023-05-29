@@ -51,12 +51,8 @@ class FitCalculatorTest {
         });
     }
 
-    @ParameterizedTest(
-            name = "weight: {0}"
-    )
-    @ValueSource(
-            doubles = {92.0, 102.0, 99.2}
-    )
+    @ParameterizedTest(name = "weight: {0}")
+    @ValueSource(doubles = {92.0, 102.0, 99.2})
     void shouldReturnTrue_whenDietIsRecommended(double weight) {
         //given
         double height = 1.8;
