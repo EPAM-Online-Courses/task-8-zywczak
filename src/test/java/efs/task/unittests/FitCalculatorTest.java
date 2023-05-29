@@ -29,7 +29,7 @@ class FitCalculatorTest {
         // then
         assertTrue(recommended);
     }
-/*
+
     @Test
     void shouldReturnFalse_whenDietRecommended() {
         // given
@@ -42,7 +42,7 @@ class FitCalculatorTest {
         // then
         assertFalse(recommended);
     }
-*/
+    
     @Test
     void shouldThrowIllegalArgumentException_whenHeightIsZero() {
         // given
@@ -111,7 +111,7 @@ class FitCalculatorTest {
     @Test
     void shouldReturnNull() {
         // given
-        List<User> userList = new ArrayList<>();
+        List<User> userList = List.of();
 
         // when
         User userWithWorstBMI = FitCalculator.findUserWithTheWorstBMI(userList);
@@ -126,10 +126,10 @@ class FitCalculatorTest {
         List<User> userList = TestConstants.TEST_USERS_LIST;
 
         // when
-       double[] bmiScores = FitCalculator.calculateBMIScore(userList);
+       List<Double> bmiScores = FitCalculator.calculateBMIScore(userList);
 
         // then
-        double[] expectedBmiScores = TestConstants.TEST_USERS_BMI_SCORE;
-        assertArrayEquals(expectedBmiScores, bmiScores);
+        List<Double> expectedBmiScores = TestConstants.TEST_USERS_BMI_SCORE;
+        assertEquals(expectedBmiScores, bmiScores);
     }
 }
