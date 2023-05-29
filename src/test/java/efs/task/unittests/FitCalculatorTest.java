@@ -66,9 +66,9 @@ class FitCalculatorTest {
 
     @ParameterizedTest(name = "height: {0}, weight: {1}")
     @CsvSource({
-            "1.70, 70.0",
-            "1.80, 80.5",
-            "1.60, 65.2"
+            "1.70, 69.0",
+            "1.80, 75.5",
+            "1.60, 55.6"
     })
     void shouldReturnFalse_whenDietIsNotRecommended(double height, double weight) {
         // when
