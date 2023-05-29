@@ -57,7 +57,7 @@ class FitCalculatorTest {
         });
     }
 
-    @ParameterizedTest(name = "Weight: {0}")
+    @ParameterizedTest(name = "weight: {0}")
     @ValueSource(doubles = {60.0, 70.0, 80.0})
     void shouldReturnTrue_whenDietRecommended(double weight) {
         // given
@@ -70,7 +70,7 @@ class FitCalculatorTest {
         assertTrue(recommended);
     }
 
-    @ParameterizedTest(name = "Height: {0}, Weight: {1}")
+    @ParameterizedTest(name = "height: {0}, weight: {1}")
     @CsvSource({
             "1.70, 70.0",
             "1.80, 80.5",
@@ -84,7 +84,7 @@ class FitCalculatorTest {
         assertFalse(recommended);
     }
 
-    @ParameterizedTest(name = "Height: {0}, Weight: {1}")
+    @ParameterizedTest(name = "height: {0}, weight: {1}")
     @CsvFileSource(resources = {"/data.csv"}, numLinesToSkip = 1)
     void shouldReturnFalse_whenDietIsRecommendedFromCsv(double height, double weight) {
         // when
