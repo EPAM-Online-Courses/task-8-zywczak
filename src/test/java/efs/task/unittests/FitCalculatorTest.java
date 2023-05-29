@@ -126,7 +126,7 @@ class FitCalculatorTest {
         List<User> userList = TestConstants.TEST_USERS_LIST;
 
         // when
-       List<double> bmiScores = FitCalculator.calculateBMIScore(testConstants);
+       List<double> bmiScores = FitCalculator.calculateBMIScore(userList);
 
         // then
         List<double> expectedBmiScores = TestConstants.TEST_USERS_BMI_SCORE;
