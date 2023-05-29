@@ -12,6 +12,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.Assertions;
 
 class FitCalculatorTest {
+    FitCalculatorTest() {
+    }
 
     @Test
     void shouldReturnTrue_whenDietRecommended() {
